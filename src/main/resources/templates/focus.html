@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Focus Mode | StudyFlow</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/focus.css}">
+    <script th:src="@{/js/focus.js}" defer></script>
+</head>
+<body class="focus-page">
+<header class="focus-topbar">
+    <a class="brand focus-brand" th:href="@{/}"><span class="brand-mark small">S</span><span>StudyFlow</span></a>
+    <a class="back-link" th:href="@{/}">← Exit focus mode</a>
+</header>
+
+<main class="focus-layout">
+    <section class="focus-heading">
+        <p class="eyebrow">ONE THING AT A TIME</p>
+        <h1>Make space to focus.</h1>
+        <p class="muted">Choose a task, start a session, and give it your attention.</p>
+    </section>
+
+    <section class="focus-card">
+        <div class="mode-tabs" role="group" aria-label="Timer mode">
+            <button type="button" class="mode-tab active" data-mode="focus">Focus</button>
+            <button type="button" class="mode-tab" data-mode="short">Short break</button>
+            <button type="button" class="mode-tab" data-mode="long">Long break</button>
+        </div>
+
+        <div class="timer-ring" id="timerRing" aria-live="off">
+            <div class="timer-inner">
+                <p class="timer-label" id="timerLabel">TIME TO FOCUS</p>
+                <div class="timer-display" id="timerDisplay" role="timer" aria-label="25 minutes 00 seconds">25:00</div>
+                <p class="timer-subtitle" id="timerSubtitle">You can do this.</p>
+            </div>
+        </div>
+
+        <div class="timer-controls">
+            <button type="button" class="button primary timer-main-button" id="startPauseButton">Start focus</button>
+            <button type="button" class="button secondary" id="resetButton">Reset</button>
+            <button type="button" class="button secondary" id="skipButton">Skip session</button>
+        </div>
+
+        <div class="session-progress">
+            <div><span>Sessions completed</span><strong id="sessionCount">0</strong></div>
+            <div class="session-dots" id="sessionDots" aria-label="Completed focus sessions">
+                <span></span><span></span><span></span><span></span>
+            </div>
+            <p id="sessionHint">Complete 4 focus sessions to earn a long break.</p>
+        </div>
+    </section>
+
+    <section class="focus-task-card">
+        <div class="focus-task-header">
+            <div><p class="eyebrow">YOUR CURRENT TASK</p><h2>What are you working on?</h2></div>
+            <span class="focus-sparkle">✦</span>
+        </div>
+        <label for="taskSelect">Choose a task (optional)</label>
+        <select id="taskSelect">
+            <option value="">Just studying — no task selected</option>
+            <option th:each="task : ${tasks}" th:if="${task.status != 'COMPLETED'}"
+                    th:value="${task.id}" th:text="|${task.title} · ${task.subject}|"></option>
+        </select>
+        <p class="focus-task-note" id="selectedTaskNote">Pick a task to keep your session intentional.</p>
+    </section>
+
+    <section class="focus-tips">
+        <div class="tip-icon">☕</div>
+        <div><strong>Remember to take breaks</strong><p>During focus time, silence notifications and work on one thing. During breaks, stretch, drink water, and rest your eyes.</p></div>
+    </section>
+</main>
+
+<div class="focus-toast" id="focusToast" role="status" aria-live="polite"></div>
+</body>
+</html>

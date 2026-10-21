@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dashboard | StudyFlow</title><link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="app-shell">
+    <aside class="sidebar">
+        <a class="brand" th:href="@{/}"><span class="brand-mark small">S</span><span>StudyFlow</span></a>
+        <p class="nav-label">WORKSPACE</p>
+        <a class="nav-link active" th:href="@{/}">▦ &nbsp; Dashboard</a>
+        <a class="nav-link" th:href="@{/(filter='PENDING')}">◷ &nbsp; Pending tasks</a>
+        <a class="nav-link" th:href="@{/(filter='COMPLETED')}">✓ &nbsp; Completed tasks</a>
+        <a class="nav-link" th:href="@{/tasks/new}">＋ &nbsp; Add a task</a>
+        <a class="nav-link" th:href="@{/focus}">◉ &nbsp; Focus mode</a>
+        <div class="sidebar-bottom">
+            <div class="student-mini"><span class="avatar" th:text="${#strings.substring(studentName,0,1).toUpperCase()}">S</span><span><strong th:text="${studentName}">Student</strong><small>Student account</small></span></div>
+            <form th:action="@{/logout}" method="post"><button class="nav-link logout" type="submit">↪ &nbsp; Log out</button></form>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <header class="topbar">
+            <div><p class="eyebrow">YOUR STUDY SPACE</p><h1>Dashboard</h1></div>
+            <div class="topbar-actions">
+                <a class="button secondary" th:href="@{/focus}">◉ Focus mode</a>
+                <a class="button primary" th:href="@{/tasks/new}">＋ <span>New task</span></a>
+            </div>
+        </header>
+
+        <section class="welcome-panel">
+            <div><p class="eyebrow light">A LITTLE PROGRESS ADDS UP</p><h2 th:text="|Hey, ${studentName}! Ready to focus?|">Hey! Ready to focus?</h2><p>Keep your assignments organised and take the next step.</p></div>
+            <div class="welcome-icon">✦</div>
+        </section>
+
+        <section class="stats-grid">
+            <article class="stat-card"><span class="stat-icon purple">▦</span><p>Total tasks</p><strong th:text="${totalCount}">0</strong><small>All your tasks</small></article>
+            <article class="stat-card"><span class="stat-icon green">✓</span><p>Completed</p><strong th:text="${completedCount}">0</strong><small>Tasks finished</small></article>
+            <article class="stat-card"><span class="stat-icon amber">◷</span><p>Pending</p><strong th:text="${pendingCount}">0</strong><small>Still to do</small></article>
+            <article class="stat-card"><span class="stat-icon red">!</span><p>Overdue</p><strong th:text="${overdueCount}">0</strong><small>Past the due date</small></article>
+        </section>
+
+        <section class="tasks-panel">
+            <div class="panel-heading"><div><h2>My tasks</h2><p class="muted">Your academic to-do list in one place.</p></div>
+                <form method="get" th:action="@{/}" class="filter-form">
+                    <select name="filter" aria-label="Filter tasks" onchange="this.form.submit()">
+                        <option value="ALL" th:selected="${filter == 'ALL'}">All tasks</option>
+                        <option value="PENDING" th:selected="${filter == 'PENDING'}">Pending</option>
+                        <option value="COMPLETED" th:selected="${filter == 'COMPLETED'}">Completed</option>
+                    </select>
+                </form>
+            </div>
+
+            <div class="empty-state" th:if="${#lists.isEmpty(tasks)}">
+                <div class="empty-icon">✓</div><h3>No tasks here yet</h3><p>Add your first assignment and start organising your day.</p>
+                <a class="button primary" th:href="@{/tasks/new}">Create your first task</a>
+            </div>
+
+            <div class="task-list" th:if="${!#lists.isEmpty(tasks)}">
+                <article class="task-row" th:each="task : ${tasks}">
+                    <form th:action="@{/tasks/{id}/toggle(id=${task.id})}" method="post">
+                        <button class="check-button" th:classappend="${task.status == 'COMPLETED'} ? ' checked' : ''" type="submit" th:attr="aria-label=${task.status == 'COMPLETED' ? 'Mark pending' : 'Mark completed'}" th:text="${task.status == 'COMPLETED' ? '✓' : ''}"></button>
+                    </form>
+                    <div class="task-main">
+                        <h3 th:classappend="${task.status == 'COMPLETED'} ? ' completed-title' : ''" th:text="${task.title}">Task title</h3>
+                        <p th:text="${task.subject}">Subject</p>
+                        <p class="task-description" th:if="${task.description != null and !task.description.isEmpty()}" th:text="${task.description}"></p>
+                    </div>
+                    <div class="task-meta">
+                        <span class="priority" th:classappend="${#strings.toLowerCase(task.priority)}" th:text="${task.priority}">MEDIUM</span>
+                        <span class="due-date" th:text="${task.dueDate == null ? 'No due date' : #temporals.format(task.dueDate, 'dd MMM yyyy')}">Due date</span>
+                    </div>
+                    <div class="task-actions">
+                        <a class="icon-button" th:href="@{/tasks/{id}/edit(id=${task.id})}" title="Edit task">✎</a>
+                        <form th:action="@{/tasks/{id}/delete(id=${task.id})}" method="post" onsubmit="return confirm('Delete this task?');">
+                            <button class="icon-button danger-text" type="submit" title="Delete task">×</button>
+                        </form>
+                    </div>
+                </article>
+            </div>
+        </section>
+        <footer class="page-footer">StudyFlow · Plan a little. Achieve a lot.</footer>
+    </main>
+</div>
+</body></html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login | StudyFlow</title><link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="auth-page">
+<div class="auth-card">
+    <div class="brand-mark">S</div>
+    <p class="eyebrow">STUDYFLOW</p>
+    <h1>Welcome back</h1>
+    <p class="muted">Log in to organise your academic life.</p>
+    <div class="alert success" th:if="${param.registered}">Account created! You can log in now.</div>
+    <div class="alert" th:if="${param.error}">Email or password is incorrect.</div>
+    <div class="alert success" th:if="${param.logout}">You have logged out successfully.</div>
+    <form th:action="@{/login}" method="post" class="form-stack">
+        <label>Email address<input type="email" name="username" placeholder="you@example.com" required autocomplete="email"></label>
+        <label>Password<input type="password" name="password" placeholder="Your password" required autocomplete="current-password"></label>
+        <button class="button primary full" type="submit">Log in</button>
+    </form>
+    <p class="auth-foot">New to StudyFlow? <a th:href="@{/register}">Create an account</a></p>
+</div>
+</body></html>

@@ -1,0 +1,21 @@
+.focus-page{min-height:100vh;background:radial-gradient(circle at 50% 10%,#eeebff 0,transparent 36%),#f8f8fc}
+.focus-topbar{height:78px;padding:0 5vw;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #e9eaf2;background:#ffffffc9}
+.focus-brand{padding:0;margin:0}.focus-topbar .back-link{margin:0}
+.focus-layout{width:min(100% - 32px,760px);margin:34px auto 60px}
+.focus-heading{text-align:center;margin-bottom:24px}.focus-heading .eyebrow{color:#6658d3;margin:0 0 8px}.focus-heading h1{font-size:clamp(27px,5vw,39px);letter-spacing:-1.5px;margin:0 0 8px}.focus-heading .muted{margin:0}
+.focus-card,.focus-task-card{background:white;border:1px solid #e9eaf2;border-radius:22px;box-shadow:0 16px 50px #29265b0b}
+.focus-card{padding:27px 28px 23px;text-align:center}
+.mode-tabs{display:flex;justify-content:center;gap:6px;background:#f5f5fa;padding:5px;border-radius:12px;width:max-content;max-width:100%;margin:0 auto 24px}
+.mode-tab{border:0;background:transparent;padding:10px 15px;border-radius:9px;color:#777b91;font-size:12px;font-weight:750;cursor:pointer}
+.mode-tab.active{background:white;color:#6658d3;box-shadow:0 2px 8px #25234b0b}
+.timer-ring{--timer-progress:0deg;width:270px;height:270px;border-radius:50%;padding:9px;margin:0 auto 24px;background:conic-gradient(#6658d3 var(--timer-progress),#efeff7 0);transition:background .2s}
+.timer-inner{height:100%;border-radius:50%;background:white;display:flex;flex-direction:column;justify-content:center;align-items:center}
+.timer-label{font-size:10px;letter-spacing:2px;font-weight:850;color:#777b91;margin:0 0 9px}
+.timer-display{font-size:58px;font-weight:800;letter-spacing:-3px;font-variant-numeric:tabular-nums;color:#25233c;line-height:1.12}
+.timer-subtitle{font-size:12px;color:#8a8ca0;margin:11px 0 0}
+.timer-controls{display:flex;justify-content:center;gap:9px;flex-wrap:wrap}.timer-main-button{min-width:142px}.button.secondary{background:#f1f0fa;color:#57516f}.button.secondary:hover{background:#e8e6f7}
+.session-progress{max-width:340px;margin:26px auto 0;padding-top:20px;border-top:1px solid #efeff5}.session-progress>div:first-child{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:#777b91}.session-progress strong{font-size:18px;color:#25233c}.session-dots{display:flex;justify-content:center;gap:9px;margin:13px 0}.session-dots span{width:12px;height:12px;border-radius:50%;border:2px solid #dcd9f7;background:white}.session-dots span.filled{background:#6658d3;border-color:#6658d3}.session-progress p{font-size:11px;color:#9a9bad;margin:0}
+.focus-task-card{margin-top:16px;padding:23px 25px}.focus-task-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:19px}.focus-task-header .eyebrow{color:#6658d3;margin:0 0 6px}.focus-task-header h2{font-size:17px;margin:0}.focus-sparkle{font-size:26px;color:#b2aaf2}.focus-task-card label{display:block;font-size:12px;font-weight:750;margin-bottom:8px;color:#45485e}.focus-task-card select{width:100%;border:1px solid #e2e3ed;border-radius:10px;padding:12px;background:white;color:#25233c;font:inherit;font-size:13px}.focus-task-note{font-size:11px;color:#8c8ea1;margin:10px 0 0}
+.focus-tips{display:flex;gap:14px;align-items:flex-start;padding:20px 8px;color:#5e6076}.tip-icon{display:grid;place-items:center;flex-shrink:0;width:36px;height:36px;border-radius:12px;background:#fff2d9;font-size:18px}.focus-tips strong{font-size:12px}.focus-tips p{font-size:11px;line-height:1.7;color:#898b9e;margin:5px 0 0}
+.focus-toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);opacity:0;pointer-events:none;max-width:calc(100% - 30px);background:#25233c;color:white;border-radius:12px;padding:13px 18px;font-size:12px;box-shadow:0 10px 30px #25233c25;transition:opacity .2s,transform .2s;z-index:5}.focus-toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:520px){.focus-topbar{height:66px;padding:0 16px}.focus-layout{margin-top:24px}.focus-card{padding:20px 12px}.mode-tabs{gap:2px}.mode-tab{padding:10px 9px;font-size:11px}.timer-ring{width:230px;height:230px}.timer-display{font-size:49px}.focus-task-card{padding:20px}.focus-task-header h2{font-size:15px}}

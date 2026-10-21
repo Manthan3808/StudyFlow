@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Edit task | StudyFlow</title><link rel="stylesheet" th:href="@{/css/style.css}"></head>
+<body class="form-page">
+<main class="form-container">
+    <a class="back-link" th:href="@{/}">← Back to dashboard</a>
+    <div class="form-card">
+        <p class="eyebrow">MAKE A CHANGE</p><h1>Edit task</h1><p class="muted">Update the assignment details below.</p>
+        <div class="alert" th:if="${error}" th:text="${error}"></div>
+        <form th:if="${task != null}" th:action="@{/tasks/{id}/edit(id=${task.id})}" method="post" class="form-stack">
+            <label>Task title<input name="title" maxlength="120" th:value="${task.title}" required></label>
+            <label>Subject<input name="subject" maxlength="80" th:value="${task.subject}" required></label>
+            <label>Description<textarea name="description" rows="4" maxlength="1000" th:text="${task.description}"></textarea></label>
+            <div class="two-columns">
+                <label>Due date<input type="date" name="dueDate" th:value="${task.dueDate}"></label>
+                <label>Priority<select name="priority"><option value="LOW" th:selected="${task.priority == 'LOW'}">Low</option><option value="MEDIUM" th:selected="${task.priority == 'MEDIUM'}">Medium</option><option value="HIGH" th:selected="${task.priority == 'HIGH'}">High</option></select></label>
+            </div>
+            <button class="button primary full" type="submit">Save changes</button>
+        </form>
+        <div th:if="${task == null}"><p>The task could not be loaded. Return to the dashboard and try again.</p><a class="button primary" th:href="@{/}">Dashboard</a></div>
+    </div>
+</main>
+</body></html>
